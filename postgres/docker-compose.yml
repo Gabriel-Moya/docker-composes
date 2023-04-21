@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    hostname: localhost
+    ports:
+      - 5432:5432
+    networks:
+      - postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1q2w3e4r@#$
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+
+networks:
+  postgres:
+
+volumes:
+  postgres:
+
+# docker-compose -p <stack_name> up -d
