@@ -10,8 +10,8 @@ services:
     networks:
       - postgres
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 1q2w3e4r@#$
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       PGDATA: /data/postgres
     volumes:
       - postgres:/data/postgres
