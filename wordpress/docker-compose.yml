@@ -1,0 +1,46 @@
+version: '3.7'
+
+services:
+  database:
+    container_name: database
+    image: mariadb:${DB_TAG}
+    ports:
+      - 3306:3306
+    networks:
+      - wordpress_net
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+
+  wordpress:
+    depends_on:
+      - database
+    container_name: wordpress
+    image: wordpress:${WP_TAG}
+    ports:
+      - 80:80
+    networks:
+      - wordpress_net
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: database:3306
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+    volumes:
+      - wp_data:/var/www/html
+
+networks:
+  wordpress_net:
+    driver: bridge
+
+volumes:
+  wp_data:
+  db_data:
+
+# docker-compose -p <stack_name> up -d
