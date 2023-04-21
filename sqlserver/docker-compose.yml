@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  mssql:
+    container_name: sqlserver_container
+    image: mcr.microsoft.com/mssql/server
+    hostname: localhost
+    ports:
+      - 1433:1433
+    networks:
+      - mssql
+    environment:
+      ACCEPT_EULA: ${ACCEPT_EULA}
+      SA_PASSWORD: ${SA_PASSWORD}
+    volumes:
+      - mssql:/var/opt/mssql/
+
+networks:
+  mssql:
+
+volumes:
+  mssql:
