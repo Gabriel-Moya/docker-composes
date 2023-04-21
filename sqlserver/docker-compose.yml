@@ -20,3 +20,5 @@ networks:
 
 volumes:
   mssql:
+
+# docker-compose -p <stack_name> up -d
