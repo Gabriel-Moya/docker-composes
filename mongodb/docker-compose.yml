@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  mongo:
+    container_name: mongo_container
+    image: mongo
+    hostname: localhost
+    ports:
+      - 27017:27017
+    networks:
+      - mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+    volumes:
+      mongo:/data/db
+
+networks:
+  mongo:
+
+volumes:
+  mongo:
+
+# docker-compose -p <stack_name> up -d
